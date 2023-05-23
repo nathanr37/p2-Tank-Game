@@ -38,8 +38,8 @@ public class Ball {
 		try {
 			URL imageURL = Ball.class.getResource(path);
 			tempImage = Toolkit.getDefaultToolkit().getImage(imageURL);
-		} catch(Exception e){
-			e.printStackTrace();
+		} catch(Exception e){  
+			e.printStackTrace(); 
 		}
 		return tempImage; 
 	}
