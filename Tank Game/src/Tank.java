@@ -18,7 +18,9 @@ public class Tank{
 	private int width; // the size of frog
 	private int height;
 	private String fileName;
-	private Image img; // image of the frog
+	private Image img; // image of the tank
+	private double angle;
+
 
 	// write the constructor for tank which tales in
 	// a string fileName that will be used for the image setup
@@ -34,6 +36,7 @@ public class Tank{
 		vy = 0;
 		width = 4;
 		height = 4;
+		angle = 0.0;
 
 		img = getImage(fileName);
 		init(x, y);
@@ -101,7 +104,11 @@ public class Tank{
 	public void paint(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
 		move(); // ask frog to update its location variables
-		g2.drawImage(img, tx, null);
+		// Apply rotation transformation
+	    AffineTransform oldTransform = g2.getTransform();
+	    g2.rotate(Math.toRadians(angle), x + width / 2, y + height / 2);
+	    g2.drawImage(img, tx, null);
+	    g2.setTransform(oldTransform);
 
 	}
 
@@ -153,6 +160,14 @@ public class Tank{
 	public void setY(int y) {
 		this.y = y;
 		tx.setToTranslation(x, y);
+	}
+	
+	public void rotateClockwise() {
+	    angle += 5.0; 
+	}
+
+	public void rotateCounterClockwise() {
+	    angle -= 5.0; 
 	}
 
 }

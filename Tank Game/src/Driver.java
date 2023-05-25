@@ -56,7 +56,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 		g.drawString(("Lives:") + Integer.toString(lives), 20, 20);
 		g.setFont(font2);
 
-		// Tank HITBOX
+		// HITBOX
 		Color nG = new Color(112, 84, 62);
 		g.setColor(nG);
 		
@@ -140,17 +140,16 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 		switch (e.getKeyCode()) {
 
 		case 37: // left
-			tank.setVx(-5);
-			temp2 = true;
-			break;
+			tank.rotateCounterClockwise();
+            break;
+
 		case 38: // up
 			tank.setVy(-5);
 			tank.setVx(0);
 			temp2 = true;
 			break;
 		case 39: // right
-			tank.setVx(5);
-			temp2 = true;
+            tank.rotateClockwise();
 			break;
 			
 		case 40: //down
