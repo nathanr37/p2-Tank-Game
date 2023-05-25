@@ -107,7 +107,7 @@ public class Tank{
 
 	private void init(double a, double b) {
 		tx.setToTranslation(a, b);
-		tx.scale(0.3, 0.3);
+		tx.scale(4, 4);
 	}
 
 	// converts image to make it drawable in paintset
