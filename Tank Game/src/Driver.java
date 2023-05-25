@@ -53,15 +53,13 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 
 		g.setFont(font);
 		g.setColor(Color.white);
-		g.drawString(("Lives:") + Integer.toString(lives), 200, 400);
+		g.drawString(("Lives:") + Integer.toString(lives), 20, 20);
 		g.setFont(font2);
 
-		// FROGGY HITBOX
+		// Tank HITBOX
 		Color nG = new Color(112, 84, 62);
 		g.setColor(nG);
 		
-		 //  MUD 
-//		 g.fill3DRect(0, 368, 865, 20, getFocusTraversalKeysEnabled());
 		 g.setColor(Color.white);
 		// VISUAL LINES 
 		 int temp = 537;

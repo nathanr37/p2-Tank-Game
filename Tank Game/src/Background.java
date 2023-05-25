@@ -27,7 +27,6 @@ public class Background {
 	public void paint(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
 		g2.drawImage(img, tx, null);
-		System.out.print("background printed");
 		
 	}
 
