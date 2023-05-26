@@ -50,4 +50,8 @@ public class Ball {
 		move();
 		g2.drawImage(img, tx, null);
 	}
+	public void fireBall(Tank t) {
+		vX = t.getVx();
+		vY = t.getVy(); 
+	}
 }
