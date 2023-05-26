@@ -50,6 +50,10 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 
 		super.paintComponent(g);
 		bg.paint(g);
+		for(int i = 10; i < 800; i += 20) {
+			g.drawLine(i, 0, i, 800);
+			g.drawLine(0, i, 800, i);
+		}
 
 		g.setFont(font);
 		g.setColor(Color.white);
