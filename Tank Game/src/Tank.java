@@ -30,8 +30,8 @@ public class Tank{
 	public Tank(String fileName) {
 		// assignment statements for attributes
 
-		x = 0;
-		y = 0;
+		x = 300;
+		y = 300;
 		vx = 0;
 		vy = 0;
 		width = 4;
@@ -102,15 +102,26 @@ public class Tank{
 
 	// draw the affine transform
 	public void paint(Graphics g) {
-		Graphics2D g2 = (Graphics2D) g;
-		move(); // ask frog to update its location variables
-		// Apply rotation transformation
+	    Graphics2D g2 = (Graphics2D) g;
+	    move();
+	    
 	    AffineTransform oldTransform = g2.getTransform();
-	    g2.rotate(Math.toRadians(angle), x + width / 2, y + height / 2);
-	    g2.drawImage(img, tx, null);
+	    int centerX = x + width / 2; // Calculate the x-coordinate of the center
+	    int centerY = y + height / 2; // Calculate the y-coordinate of the center
+	    
+	    // Translate the graphics context to the center of the tank
+	    g2.translate(centerX, centerY);
+	    
+	    // Rotate around the center of the tank
+	    g2.rotate(Math.toRadians(angle));
+	    
+	    // Draw the tank image centered at the tank's position
+	    g2.drawImage(img, -width / 2, -height / 2, width, height, null);
+	    
+	    // Reset the transformation
 	    g2.setTransform(oldTransform);
-
 	}
+	
 
 	private void init(double a, double b) {
 		tx.setToTranslation(a, b);
