@@ -172,6 +172,9 @@ public class Tank{
 		this.y = y;
 		tx.setToTranslation(x, y);
 	}
+	public int getVy() {
+		return vy;
+	}
 	
 	public void rotateClockwise() {
 	    angle += 5.0; 
