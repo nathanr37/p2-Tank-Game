@@ -160,6 +160,10 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 			tank.setVy(5);
 			temp2 = true;
 			break;
+			
+		case 49:
+			Ball b = new Ball(5, 5, tank.getX(), tank.getY(), "Boba.png");
+			
 
 		/*
 		 * case KeyEvent.VK_W: // up tank.hop(10); break;
