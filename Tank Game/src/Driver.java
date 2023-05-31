@@ -74,6 +74,10 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 		g.fillRect(280, 360, 20, 20);
 		g.fillRect(380, 360, 20, 20);
 		g.fillRect(480, 360, 20, 20);
+		g.fillRect(420, 460, 20, 20);
+		g.fillRect(340, 460, 20, 20);
+		g.fillRect(380, 560, 20, 20);
+
 
 
 		g.setFont(font);
