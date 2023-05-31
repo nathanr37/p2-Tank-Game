@@ -50,10 +50,35 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 
 		super.paintComponent(g);
 		bg.paint(g);
-		for(int i = 10; i < 800; i += 20) {
+
+		for(int i = 0; i < 800; i += 20) {
 			g.drawLine(i, 0, i, 800);
 			g.drawLine(0, i, 800, i);
 		}
+		g.fillRect(0, 0, 800, 20);
+		g.fillRect(0, 0, 20, 800);
+		g.fillRect(760, 0, 30, 800);
+		g.fillRect(0, 780, 800, 20);
+		g.fillRect(120, 180, 20, 260);
+		g.fillRect(640, 180, 20, 260);
+		g.fillRect(240, 440, 20, 160);
+		g.fillRect(520, 440, 20, 160);
+		g.fillRect(360, 640, 60, 20);
+		g.fillRect(240, 140, 300, 20);
+		g.fillRect(280, 120, 220, 20);
+		g.fillRect(380, 60, 20, 60);
+		g.fillRect(240, 260, 20, 20);
+		g.fillRect(340, 260, 20, 20);
+		g.fillRect(420, 260, 20, 20);
+		g.fillRect(520, 260, 20, 20);
+		g.fillRect(280, 360, 20, 20);
+		g.fillRect(380, 360, 20, 20);
+		g.fillRect(480, 360, 20, 20);
+		g.fillRect(420, 460, 20, 20);
+		g.fillRect(340, 460, 20, 20);
+		g.fillRect(380, 560, 20, 20);
+
+
 
 		g.setFont(font);
 		g.setColor(Color.white);
