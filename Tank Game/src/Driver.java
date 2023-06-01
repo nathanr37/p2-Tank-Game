@@ -142,7 +142,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 		b = new Ball(5, 5, tank.getX(), tank.getY(), "Boba.png");
 
 		// Add background
-		bg = new Background("Pink.jpeg");
+		bg = new Background("Pink.png");
 
 		// do not add to frame, call paint on
 		// these objects in paint method
