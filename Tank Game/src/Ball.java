@@ -44,13 +44,19 @@ public class Ball {
 	private Image getImage(String path) {
 		Image tempImage = null;
 		try {
-			URL imageURL = Ball.class.getResource(path);
+			URL imageURL = Background.class.getResource(path);
 			tempImage = Toolkit.getDefaultToolkit().getImage(imageURL);
-		} catch(Exception e){  
-			e.printStackTrace(); 
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		return tempImage; 
+		return tempImage;
+	
 	}
+	private void init(double a, double b) {
+		tx.setToTranslation(a, b);
+		tx.scale(1, 1);
+	}
+
 	public void paint(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
 		move();

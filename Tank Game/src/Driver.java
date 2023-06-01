@@ -26,7 +26,7 @@ import java.awt.geom.AffineTransform;
 public class Driver extends JPanel implements ActionListener, KeyListener {
 
 	private int score;
-	private boolean 
+	boolean fired = false;
 	boolean temp2 = true;
 	// Music hop = new Music("Sweep.wav", false);
 
@@ -35,6 +35,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 	int screen_width = 800;
 	int screen_height = 800;
 	Tank tank;
+	Ball b;
 
 	Background bg;
 	int lives = 3; // example
@@ -98,6 +99,9 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 
 		// paint and update tank
 		tank.paint(g);
+		if(fired) {
+			b.paint(g);
+		}
 		
 		// Draw tank angle
 	    g.setColor(Color.black);
@@ -135,6 +139,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 
 		// sprite instantiation
 		tank = new Tank("Boba Tank.png");
+		b = new Ball(5, 5, tank.getX(), tank.getY(), "Boba.png");
 
 		// Add background
 		bg = new Background("Pink.jpeg");
@@ -187,7 +192,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 			temp2 = true;
 			break;
 		case 49:
-			Ball b = new Ball(5, 5, tank.getX(), tank.getY(), "Boba.png");
+			fired = true; 
 
 			/*
 			 * case KeyEvent.VK_W: // up tank.hop(10); break;
