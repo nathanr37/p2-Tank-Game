@@ -9,7 +9,7 @@ import java.net.URL;
 public class Tank {
 
     private int x, y;
-    private int vx, vy;
+    private double vx, vy;
     private boolean alive;
     private int width;
     private int height;
@@ -20,8 +20,8 @@ public class Tank {
     public Tank(String fileName) {
         x = 0;
         y = 0;
-        vx = 0;
-        vy = 0;
+        vx = 0.0;
+        vy = 0.0;
         width = 100;
         height = 100;
         angle = 0;
@@ -37,14 +37,14 @@ public class Tank {
     }
 
     public void rotateClockwise() {
-        angle += 5;
+        angle += 45;
         if (angle >= 360) {
             angle -= 360;
         }
     }
 
     public void rotateCounterClockwise() {
-        angle -= 5;
+        angle -= 45;
         if (angle < 0) {
             angle += 360;
         }
@@ -58,6 +58,8 @@ public class Tank {
         g2.rotate(Math.toRadians(angle), width / 2, height / 2);
         g2.drawImage(img, 0, 0, width, height, null);
         g2.setTransform(oldTransform);
+        
+        
     }
 
     private AffineTransform tx = AffineTransform.getTranslateInstance(x, y);
@@ -78,11 +80,11 @@ public class Tank {
         return tempImage;
     }
 
-    public void setVx(int vx) {
+    public void setVx(double vx) {
         this.vx = vx;
     }
 
-    public void setVy(int vy) {
+    public void setVy(double vy) {
         this.vy = vy;
     }
 

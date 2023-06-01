@@ -1,8 +1,6 @@
 
 //https://github.com/domingodavid/froggerEclipse
 
-
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -29,14 +27,14 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 
 	private int score;
 	boolean temp2 = true;
-	//Music hop = new Music("Sweep.wav", false);
-	
-	//hop.play
-	
+	// Music hop = new Music("Sweep.wav", false);
+
+	// hop.play
+
 	int screen_width = 800;
 	int screen_height = 800;
 	Tank tank;
-	
+
 	Background bg;
 	int lives = 3; // example
 
@@ -51,7 +49,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 		super.paintComponent(g);
 		bg.paint(g);
 
-		for(int i = 0; i < 800; i += 20) {
+		for (int i = 0; i < 800; i += 20) {
 			g.drawLine(i, 0, i, 800);
 			g.drawLine(0, i, 800, i);
 		}
@@ -78,8 +76,6 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 		g.fillRect(340, 460, 20, 20);
 		g.fillRect(380, 560, 20, 20);
 
-
-
 		g.setFont(font);
 		g.setColor(Color.white);
 		g.drawString(("Lives:") + Integer.toString(lives), 20, 20);
@@ -88,23 +84,23 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 		// HITBOX
 		Color nG = new Color(112, 84, 62);
 		g.setColor(nG);
-		
-		 g.setColor(Color.white);
-		// VISUAL LINES 
-		 int temp = 537;
-		 //g.drawLine(0, temp, 800, temp);
-		 
-		 g.setColor(Color.CYAN);
+
+		g.setColor(Color.white);
+		// VISUAL LINES
+		int temp = 537;
+		// g.drawLine(0, temp, 800, temp);
+
+		g.setColor(Color.CYAN);
 		// g.drawLine(0, 380, 800, 380);
-		 g.setColor(Color.white);
+		g.setColor(Color.white);
 		// g.drawLine(0, 805, 400, 805);
-		
-		
-		
-		
+
 		// paint and update tank
 		tank.paint(g);
 		
+		// Draw tank angle
+	    g.setColor(Color.black);
+	    g.drawString("Tank Angle: " + tank.getAngle(), 20, 60);
 
 	}
 
@@ -116,8 +112,6 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 		tank.move();
 	}
 
-	
-	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		update();
@@ -141,9 +135,8 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 		// sprite instantiation
 		tank = new Tank("Boba Tank.png");
 
-
 		// Add background
-		bg = new Background("Floor.jpeg");
+		bg = new Background("Pink.jpeg");
 
 		// do not add to frame, call paint on
 		// these objects in paint method
@@ -170,41 +163,44 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 
 		case 37: // left
 			tank.rotateCounterClockwise();
-            break;
+			break;
 
 		case 38: // up
-			tank.setVy(-5);
-			tank.setVx(0);
+			double radians = Math.toRadians(tank.getAngle());
+			double dx = Math.sin(radians);
+			double dy = -Math.cos(radians);
+			tank.setVx((int) (2 * dx)); // Set the velocity components based on the angle
+			tank.setVy((int) (2 * dy));
 			temp2 = true;
 			break;
 		case 39: // right
-            tank.rotateClockwise();
+			tank.rotateClockwise();
 			break;
-			
-		case 40: //down
-			tank.setVy(5);
+
+		case 40: // down
+			double rads = Math.toRadians(tank.getAngle());
+			double dx2 = Math.sin(rads);
+			double dy2 = -Math.cos(rads);
+			tank.setVx(-(int) (2 * dx2)); // Set the velocity components based on the angle
+			tank.setVy(-(int) (2 * dy2));
 			temp2 = true;
 			break;
-			
 		case 49:
 			Ball b = new Ball(5, 5, tank.getX(), tank.getY(), "Boba.png");
-			
 
-		/*
-		 * case KeyEvent.VK_W: // up tank.hop(10); break;
-		 * 
-		 * case KeyEvent.VK_S: // down break;
-		 */
+			/*
+			 * case KeyEvent.VK_W: // up tank.hop(10); break;
+			 * 
+			 * case KeyEvent.VK_S: // down break;
+			 */
 
-		// handle going left and right
-		// A and D keys
+			// handle going left and right
+			// A and D keys
 
 		}
 
 	}
 
-
-	
 	@Override
 	public void keyReleased(KeyEvent e) {
 		/*
@@ -214,26 +210,45 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 		if (e.getKeyCode() == 38) {
 			tank.setVy(0);
 			tank.setVx(0);
-			
+
 		}
 
 		if (e.getKeyCode() == 39) {
 			tank.setVy(0);
 			tank.setVx(0);
-			
+
 		}
 
 		if (e.getKeyCode() == 37) {
 			tank.setVy(0);
 			tank.setVx(0);
 		}
-		
+
 		if (e.getKeyCode() == 40) {
 			tank.setVy(0);
 			tank.setVx(0);
 		}
 
 		// do the same thing for the other keys
+	}
+	
+	private boolean isAngleCloseToCardinalOrDiagonal(double angle) {
+	    double angleDegrees = Math.toDegrees(angle);
+	    return (Math.abs(angleDegrees) < 15 || Math.abs(angleDegrees - 45) < 15 || Math.abs(angleDegrees - 90) < 15
+	            || Math.abs(angleDegrees - 135) < 15 || Math.abs(angleDegrees - 180) < 15
+	            || Math.abs(angleDegrees - 225) < 15 || Math.abs(angleDegrees - 270) < 15
+	            || Math.abs(angleDegrees - 315) < 15 || Math.abs(angleDegrees - 360) < 15);
+	}
+	
+	private void handleCardinalOrDiagonalMovement(boolean isUp) {
+	    int velocityMagnitude = 5;
+	    if (isUp) {
+	        tank.setVx(0);
+	        tank.setVy(-velocityMagnitude);
+	    } else {
+	        tank.setVx(0);
+	        tank.setVy(velocityMagnitude);
+	    }
 	}
 
 	@Override
