@@ -11,8 +11,8 @@ public class Ball {
 	private String fileName;
 	private int width;
 	private int height;
-	private int vX;
-	private int vY; 
+	private double vx;
+	private double vy; 
 	private int x;
 	private int y;
 	private Image img; 
@@ -25,15 +25,21 @@ public class Ball {
 		this.fileName = fileName;
 		img = getImage(fileName);
 	}
-	public void setVX(int vX) {
-		this.vX = vX;
+	public void setvx(double vx) {
+		this.vx = vx;
 	}
-	public void setVY(int vY) {
-		this.vY = vY;
+	public void setvy(double vy) {
+		this.vy = vy;
+	}
+	public double getvx() {
+		return vx;
+	}
+	public double getvy() {
+		return vy; 
 	}
 	public void move() {
-		y += vY;
-		x += vX;
+		y += vy;
+		x += vx;
 	}
 	private Image getImage(String path) {
 		Image tempImage = null;
@@ -51,7 +57,7 @@ public class Ball {
 		g2.drawImage(img, tx, null);
 	}
 	public void fireBall(Tank t) {
-		vX = t.getVx();
-		vY = t.getVy(); 
+		vx = t.getVx();
+		vy = t.getVy(); 
 	}
 }

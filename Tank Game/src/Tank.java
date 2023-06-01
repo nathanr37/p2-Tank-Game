@@ -87,6 +87,12 @@ public class Tank {
     public void setVy(double vy) {
         this.vy = vy;
     }
+    public double getVx() {
+    	return vx;
+    }
+    public double getVy() {
+    	return vy; 
+    }
 
     public int getX() {
         return x;

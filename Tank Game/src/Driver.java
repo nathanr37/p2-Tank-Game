@@ -26,6 +26,7 @@ import java.awt.geom.AffineTransform;
 public class Driver extends JPanel implements ActionListener, KeyListener {
 
 	private int score;
+	private boolean 
 	boolean temp2 = true;
 	// Music hop = new Music("Sweep.wav", false);
 
