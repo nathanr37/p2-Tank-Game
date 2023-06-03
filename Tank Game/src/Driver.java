@@ -28,6 +28,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 	private int score;
 	boolean fired = false;
 	boolean temp2 = true;
+	private Map strawberry;
 	// Music hop = new Music("Sweep.wav", false);
 
 	// hop.play
@@ -55,29 +56,33 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 			g.drawLine(i, 0, i, 800);
 			g.drawLine(0, i, 800, i);
 		}
-		g.fillRect(0, 0, 800, 20);
-		g.fillRect(0, 0, 20, 800);
-		g.fillRect(760, 0, 30, 800);
-		g.fillRect(0, 780, 800, 20);
-		g.fillRect(120, 180, 20, 260);
-		g.fillRect(640, 180, 20, 260);
-		g.fillRect(240, 440, 20, 160);
-		g.fillRect(520, 440, 20, 160);
-		g.fillRect(360, 640, 60, 20);
-		g.fillRect(240, 140, 300, 20);
-		g.fillRect(280, 120, 220, 20);
-		g.fillRect(380, 60, 20, 60);
-		g.fillRect(240, 260, 20, 20);
-		g.fillRect(340, 260, 20, 20);
-		g.fillRect(420, 260, 20, 20);
-		g.fillRect(520, 260, 20, 20);
-		g.fillRect(280, 360, 20, 20);
-		g.fillRect(380, 360, 20, 20);
-		g.fillRect(480, 360, 20, 20);
-		g.fillRect(420, 460, 20, 20);
-		g.fillRect(340, 460, 20, 20);
-		g.fillRect(380, 560, 20, 20);
-
+		strawberry = new Map();
+		strawberry.addWall(0, 0, 800, 20);
+		strawberry.addWall(0, 0, 20, 800);
+		strawberry.addWall(760, 0, 30, 800);
+		strawberry.addWall(0, 780, 800, 20);
+		strawberry.addWall(120, 180, 20, 260);
+		strawberry.addWall(640, 180, 20, 260);
+		strawberry.addWall(240, 440, 20, 160);
+		strawberry.addWall(520, 440, 20, 160);
+		strawberry.addWall(360, 640, 60, 20);
+		strawberry.addWall(240, 140, 300, 20);
+		strawberry.addWall(280, 120, 220, 20);
+		strawberry.addWall(380, 60, 20, 60);
+		strawberry.addWall(240, 260, 20, 20);
+		strawberry.addWall(340, 260, 20, 20);
+		strawberry.addWall(420, 260, 20, 20);
+		strawberry.addWall(520, 260, 20, 20);
+		strawberry.addWall(280, 360, 20, 20);
+		strawberry.addWall(380, 360, 20, 20);
+		strawberry.addWall(480, 360, 20, 20);
+		strawberry.addWall(420, 460, 20, 20);
+		strawberry.addWall(340, 460, 20, 20);
+		strawberry.addWall(380, 560, 20, 20);
+		
+		for(int i = 0; i < strawberry.getMap().size(); i++) {
+			g.fillRect(strawberry.getMap().get(i).getX(), strawberry.getMap().get(i).getY(), strawberry.getMap().get(i).getWidth(), strawberry.getMap().get(i).getHeight());
+		}
 		g.setFont(font);
 		g.setColor(Color.white);
 		g.drawString(("Lives:") + Integer.toString(lives), 20, 20);
@@ -99,6 +104,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 
 		// paint and update tank
 		tank.paint(g);
+		g.drawRect(tank.getX() + 28, tank.getY() + 30, tank.getWidth() - 56, tank.getHeight() - 60);
 		if(fired) {
 			b.paint(g);
 		}
@@ -114,7 +120,21 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 
 	//
 	public void update() {
+		boolean colid = false;
+		for(int i = 0; i < strawberry.getMap().size(); i++) {
+			if(tank.collided(strawberry.getMap().get(i).getX(), strawberry.getMap().get(i).getY(), strawberry.getMap().get(i).getWidth(), strawberry.getMap().get(i).getHeight())) {
+				colid = true;
+				tank.setVx(-tank.getVx() * 10);
+				tank.setVy(-tank.getVy() * 10);
+			}
+		}
 		tank.move();
+		
+		if(colid) {
+		tank.setVx(0);
+		tank.setVy(0);
+		}
+		
 	}
 
 	@Override

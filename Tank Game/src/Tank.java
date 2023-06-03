@@ -18,8 +18,8 @@ public class Tank {
     private double angle;
 
     public Tank(String fileName) {
-        x = 0;
-        y = 0;
+        x = 20;
+        y = 20;
         vx = 0.0;
         vy = 0.0;
         width = 100;
@@ -49,11 +49,18 @@ public class Tank {
             angle += 360;
         }
     }
+    
+    public boolean collided(int ox, int oy, int ow, int oh) {
+    	Rectangle obs = new Rectangle(ox, oy, ow, oh);
+    	Rectangle tank = new Rectangle(x + 28, y + 30, width - 56, height - 60);
+    	return obs.intersects(tank);
+    }
 
     public void paint(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
         move();
         AffineTransform oldTransform = g2.getTransform();
+        AffineTransform at = g2.getTransform();
         g2.translate(x, y);
         g2.rotate(Math.toRadians(angle), width / 2, height / 2);
         g2.drawImage(img, 0, 0, width, height, null);
