@@ -28,6 +28,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 
 	private int score;
 	boolean fired = false;
+	boolean fired2 = false;
 	boolean temp2 = true;
 	private Map strawberry;
 	private Map matcha;
@@ -58,6 +59,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 	Tank taroEx2;
 	Tank strawberryEx2;
 	Ball b;
+	Ball b2;
 	int map;
 
 	Background bg;
@@ -304,9 +306,17 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 		p1.paint(g);
 		p2.paint(g);
 //		g.drawRect(tank.getX() + 28, tank.getY() + 30, tank.getWidth() - 56, tank.getHeight() - 60);
-//		if(fired) {
-//			b.paint(g);
-//		}
+		if(fired) {
+			if(b != null) {
+			b.paint(g);
+			//g.drawRect(b.getX(), b.getY(), b.getW(), b.getH());
+			}
+		}
+		if(fired2) {
+			if(b2 != null) {
+				b2.paint(g);
+			}
+		}
 		
 		// Draw tank angle
 	    g.setColor(Color.black);
@@ -329,12 +339,43 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 				p1.setVx(-p1.getVx() * 10);
 				p1.setVy(-p1.getVy() * 10);
 			}
+			if(fired) {
+				if(b.collided(p2.getX() + 28, p2.getY() + 30, p2.getWidth() - 56, p2.getHeight() - 60)) {
+					b.setx(900);
+					b.sety(900);
+					b.setvx(0);
+					b.setvy(0);
+					fired = false;
+				}
+				if(b.collided(strawberry.getMap().get(i).getX(), strawberry.getMap().get(i).getY(), strawberry.getMap().get(i).getWidth(), strawberry.getMap().get(i).getHeight())) {
+					b.setx(900);
+					b.sety(900);
+					b.setvx(0);
+					b.setvy(0);
+					fired = false;
+				}
+			}
+				if(fired2) {
+					if(b2.collided(p1.getX() + 28, p1.getY() + 30, p1.getWidth() - 56, p1.getHeight() - 60)) {
+						b2.setx(900);
+						b2.sety(900);
+						b2.setvx(0);
+						b2.setvy(0);
+						fired2 = false;
+					}
+					if(b2.collided(strawberry.getMap().get(i).getX(), strawberry.getMap().get(i).getY(), strawberry.getMap().get(i).getWidth(), strawberry.getMap().get(i).getHeight())) {
+						b2.setx(900);
+						b2.sety(900);
+						b2.setvx(0);
+						b2.setvy(0);
+						fired2 = false;
+					}
+			}
 			if(p2.collided(strawberry.getMap().get(i).getX(), strawberry.getMap().get(i).getY(), strawberry.getMap().get(i).getWidth(), strawberry.getMap().get(i).getHeight())) {
 				colid2 = true;
 				p2.setVx(-p2.getVx() * 10);
 				p2.setVy(-p2.getVy() * 10);
 			}
-		}
 		}
 		if(p1 != null) {
 			p1.move();
@@ -351,9 +392,42 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 			p2.setVy(0);
 		}
 		}
+		}
 		if(map == 1) {
 			if(matcha != null) {
 				for(int i = 0; i < matcha.getMap().size(); i++) {
+					if(fired) {
+						if(b.collided(p2.getX() + 28, p2.getY() + 30, p2.getWidth() - 56, p2.getHeight() - 60)) {
+							b.setx(900);
+							b.sety(900);
+							b.setvx(0);
+							b.setvy(0);
+							fired = false;
+						}
+						if(b.collided(matcha.getMap().get(i).getX(), matcha.getMap().get(i).getY(), matcha.getMap().get(i).getWidth(), matcha.getMap().get(i).getHeight())) {
+							b.setx(900);
+							b.sety(900);
+							b.setvx(0);
+							b.setvy(0);
+							fired = false;
+						}
+					}
+						if(fired2) {
+							if(b2.collided(p1.getX() + 28, p1.getY() + 30, p1.getWidth() - 56, p1.getHeight() - 60)) {
+								b2.setx(900);
+								b2.sety(900);
+								b2.setvx(0);
+								b2.setvy(0);
+								fired2 = false;
+							}
+							if(b2.collided(matcha.getMap().get(i).getX(), matcha.getMap().get(i).getY(), matcha.getMap().get(i).getWidth(), matcha.getMap().get(i).getHeight())) {
+								b2.setx(900);
+								b2.sety(900);
+								b2.setvx(0);
+								b2.setvy(0);
+								fired2 = false;
+							}
+						}
 					if(p1.collided(matcha.getMap().get(i).getX(), matcha.getMap().get(i).getY(), matcha.getMap().get(i).getWidth(), matcha.getMap().get(i).getHeight())) {
 						colid = true;
 						p1.setVx(-p1.getVx() * 10);
@@ -406,6 +480,8 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 		f.setResizable(false);
 		f.addKeyListener(this); // listen for keypresses on this frame
 
+		b = new Ball();
+		b2 = new Ball();
 		// sprite instantiation
 		regEx = new Tank("Boba Tank.png");
 		matchaEx = new Tank("matcha.png");
@@ -490,10 +566,10 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 		case 87: // up
 			if(isGame) {
 			double radians = Math.toRadians(p2.getAngle());
-			double dx = Math.sin(radians);
-			double dy = -Math.cos(radians);
-			p2.setVx((int) (2 * dx)); // Set the velocity components based on the angle
-			p2.setVy((int) (2 * dy));
+			double dx1 = Math.sin(radians);
+			double dy1 = -Math.cos(radians);
+			p2.setVx((int) (2 * dx1)); // Set the velocity components based on the angle
+			p2.setVy((int) (2 * dy1));
 			temp2 = true;
 			}
 			break;
@@ -506,10 +582,10 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 		case 83: // down
 			if(isGame) {
 			double rads = Math.toRadians(p2.getAngle());
-			double dx2 = Math.sin(rads);
-			double dy2 = -Math.cos(rads);
-			p2.setVx(-(int) (2 * dx2)); // Set the velocity components based on the angle
-			p2.setVy(-(int) (2 * dy2));
+			double dx12 = Math.sin(rads);
+			double dy12 = -Math.cos(rads);
+			p2.setVx(-(int) (2 * dx12)); // Set the velocity components based on the angle
+			p2.setVy(-(int) (2 * dy12));
 			temp2 = true;
 			}
 			break;
@@ -521,7 +597,6 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 				isSelectMap = false;
 				isGame = false;
 			}
-			fired = true; 
 			break;
 			/*
 			 * case KeyEvent.VK_W: // up tank.hop(10); break;
@@ -701,6 +776,95 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 			if(isGame) {
 				p2.setVy(0);
 				p2.setVx(0);
+			}
+		}
+		
+		if(e.getKeyCode() == 77) {
+			//Ball b = new Ball();
+			if(!fired) {
+			fired = true;
+			double rads = Math.toRadians(p1.getAngle());
+			if(rads == 0.0) {
+				b.setx(p1.getX() + 49);
+				b.sety(p1.getY() + 10);
+			}
+			else if(rads == 45.0) {
+				b.setx(p1.getX() + 80);
+				b.sety(p1.getY() + 30);
+			}
+			else if(rads == 90.0) {
+				b.setx(p1.getX() + 49);
+				b.sety(p1.getY() + 10);
+			}
+			else if(rads == 135.0) {
+				b.setx(p1.getX() + 49);
+				b.sety(p1.getY() + 10);
+			}
+			else if(rads == 180.0) {
+				b.setx(p1.getX() + 49);
+				b.sety(p1.getY() + 10);
+			}
+			else if(rads == 225.0) {
+				b.setx(p1.getX() + 49);
+				b.sety(p1.getY() + 10);
+			}
+			else if(rads == 270.0) {
+				b.setx(p1.getX() + 49);
+				b.sety(p1.getY() + 10);
+			}
+			else if(rads == 315.0) {
+				b.setx(p1.getX() + 49);
+				b.sety(p1.getY() + 10);
+			}
+			double dx = Math.sin(rads);
+			double dy = -Math.cos(rads);
+			b.setvx((int) (2 * dx)); // Set the velocity components based on the angle
+			b.setvy((int) (2 * dy));
+			b.move();
+			}
+		}
+		if(e.getKeyCode() == 67) {
+			//Ball b = new Ball();
+			if(!fired2) {
+			fired2 = true;
+			double rads = Math.toRadians(p2.getAngle());
+			if(rads == 0.0) {
+				b2.setx(p2.getX() + 49);
+				b2.sety(p2.getY() + 10);
+			}
+			else if(rads == 45.0) {
+				b2.setx(p2.getX() + 80);
+				b2.sety(p2.getY() + 30);
+			}
+			else if(rads == 90.0) {
+				b2.setx(p2.getX() + 49);
+				b2.sety(p2.getY() + 10);
+			}
+			else if(rads == 135.0) {
+				b2.setx(p2.getX() + 49);
+				b2.sety(p2.getY() + 10);
+			}
+			else if(rads == 180.0) {
+				b2.setx(p2.getX() + 49);
+				b2.sety(p2.getY() + 10);
+			}
+			else if(rads == 225.0) {
+				b2.setx(p2.getX() + 49);
+				b2.sety(p2.getY() + 10);
+			}
+			else if(rads == 270.0) {
+				b2.setx(p2.getX() + 49);
+				b2.sety(p2.getY() + 10);
+			}
+			else if(rads == 315.0) {
+				b2.setx(p2.getX() + 49);
+				b2.sety(p2.getY() + 10);
+			}
+			double dx = Math.sin(rads);
+			double dy = -Math.cos(rads);
+			b2.setvx((int) (2 * dx)); // Set the velocity components based on the angle
+			b2.setvy((int) (2 * dy));
+			b2.move();
 			}
 		}
 

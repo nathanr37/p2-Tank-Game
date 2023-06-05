@@ -60,7 +60,6 @@ public class Tank {
         Graphics2D g2 = (Graphics2D) g;
         move();
         AffineTransform oldTransform = g2.getTransform();
-        AffineTransform at = g2.getTransform();
         g2.translate(x, y);
         g2.rotate(Math.toRadians(angle), width / 2, height / 2);
         g2.drawImage(img, 0, 0, width, height, null);

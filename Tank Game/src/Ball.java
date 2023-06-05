@@ -1,5 +1,6 @@
 
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -8,28 +9,32 @@ import java.awt.Toolkit;
 import java.awt.geom.AffineTransform;
 import java.net.URL;
 public class Ball {
-	private String fileName;
 	private int width;
 	private int height;
 	private double vx;
 	private double vy; 
 	private int x;
 	private int y;
-	private Image img; 
 	private AffineTransform tx = AffineTransform.getTranslateInstance(x, y);
-	public Ball(int width, int height, int x, int y, String fileName) {
-		this.x = x;
-		this.y = y;
-		this.width = width;
-		this.height = height;
-		this.fileName = fileName;
-		img = getImage(fileName);
+	public Ball() {
+		x = 900;
+		y = 900;
+		width = 8;
+		height = 8;
+		init();
 	}
 	public void setvx(double vx) {
 		this.vx = vx;
 	}
 	public void setvy(double vy) {
 		this.vy = vy;
+	}
+	
+	public void setx(int ex) {
+		x = ex;
+	}
+	public void sety(int ey) {
+		y = ey;
 	}
 	public double getvx() {
 		return vx;
@@ -40,30 +45,44 @@ public class Ball {
 	public void move() {
 		y += vy;
 		x += vx;
+        tx.setToTranslation(x, y);
 	}
-	private Image getImage(String path) {
-		Image tempImage = null;
-		try {
-			URL imageURL = Background.class.getResource(path);
-			tempImage = Toolkit.getDefaultToolkit().getImage(imageURL);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return tempImage;
-	
-	}
-	private void init(double a, double b) {
-		tx.setToTranslation(a, b);
+
+	private void init() {
+		tx.setToTranslation(x, y);
 		tx.scale(1, 1);
 	}
+	
+	 public boolean collided(int ox, int oy, int ow, int oh) {
+	    	Rectangle obs = new Rectangle(ox, oy, ow, oh);
+	    	Rectangle b = new Rectangle(x, y, width, height);
+	    	return obs.intersects(b);
+	    }
 
 	public void paint(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
 		move();
-		g2.drawImage(img, tx, null);
+		AffineTransform oldTransform = g2.getTransform();
+		g2.setColor(Color.black);
+		g2.fillOval(x, y, width, height);
+        g2.translate(x, y);
+        g2.setTransform(oldTransform);
+
 	}
 	public void fireBall(Tank t) {
 		vx = t.getVx();
 		vy = t.getVy(); 
+	}
+	public int getX() {
+		return x;
+	}
+	public int getY() {
+		return y;
+	}
+	public int getW() {
+		return width;
+	}
+	public int getH() {
+		return height;
 	}
 }
