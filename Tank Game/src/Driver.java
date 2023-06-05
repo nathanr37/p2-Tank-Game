@@ -65,7 +65,8 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 	Background bg;
 	Background start;
 	Background m;
-	int lives = 5; // example
+	int lives1 = 5;
+	int lives2 = 5;
 
 	String lose = "";
 	String win = "";
@@ -283,24 +284,11 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 			}
 		}
 
-		g.setFont(font);
-		g.setColor(Color.white);
-		g.drawString(("Lives:") + Integer.toString(lives), 20, 20);
+		g.setFont(new Font("Courier New", 1, 30));
+		g.setColor(Color.black);
+		g.drawString(("Lives:") + Integer.toString(lives1), 20, 20);
+		g.drawString(("Lives:") + Integer.toString(lives2), 635, 20);
 		g.setFont(font2);
-
-		// HITBOX
-		Color nG = new Color(112, 84, 62);
-		g.setColor(nG);
-
-		g.setColor(Color.white);
-		// VISUAL LINES
-		int temp = 537;
-		// g.drawLine(0, temp, 800, temp);
-
-		g.setColor(Color.CYAN);
-		// g.drawLine(0, 380, 800, 380);
-		g.setColor(Color.white);
-		// g.drawLine(0, 805, 400, 805);
 
 		// paint and update tank
 		p1.paint(g);
@@ -317,10 +305,27 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 				b2.paint(g);
 			}
 		}
+		if(lives1 == 0 || lives2 == 0) {
+			start.paint(g);
+			if(lives1 == 0) {
+				g.setFont(new Font("Courier New", 1, 100));
+				g.setColor(Color.black);
+				g.drawString("Player 1 wins!", 5, 300);
+				g.setFont(new Font("Courier New", 1, 30));
+			    g.drawString("Press space to restart", 200, 400);
+			}
+			else {
+				g.setFont(new Font("Courier New", 1, 100));
+				g.setColor(Color.black);
+				g.drawString("Player 2 wins!", 5, 300);
+				g.setFont(new Font("Courier New", 1, 30));
+			    g.drawString("Press space to restart", 200, 400);
+			}
+		}
 		
 		// Draw tank angle
-	    g.setColor(Color.black);
-	    g.drawString("Tank Angle: " + p1.getAngle(), 20, 60);
+//	    g.setColor(Color.black);
+//	    g.drawString("Tank Angle: " + p1.getAngle(), 20, 60);
 		}
 	}
 
@@ -356,6 +361,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 					p2.setX(20);
 					p2.setY(260);
 					fired = false;
+					lives1--;
 				}
 				if(b.collided(strawberry.getMap().get(i).getX(), strawberry.getMap().get(i).getY(), strawberry.getMap().get(i).getWidth(), strawberry.getMap().get(i).getHeight())) {
 					b.setx(900);
@@ -382,6 +388,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 						p2.setX(20);
 						p2.setY(260);
 						fired2 = false;
+						lives2--;
 					}
 					if(b2.collided(strawberry.getMap().get(i).getX(), strawberry.getMap().get(i).getY(), strawberry.getMap().get(i).getWidth(), strawberry.getMap().get(i).getHeight())) {
 						b2.setx(900);
@@ -433,6 +440,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 							p2.setX(20);
 							p2.setY(315);  
 							fired = false;
+							lives1--;
 						}
 						if(b.collided(matcha.getMap().get(i).getX(), matcha.getMap().get(i).getY(), matcha.getMap().get(i).getWidth(), matcha.getMap().get(i).getHeight())) {
 							b.setx(900);
@@ -459,6 +467,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 								p1.setY(315);
 								p2.setX(20);
 								p2.setY(315);  
+								lives2--;
 							}
 							if(b2.collided(matcha.getMap().get(i).getX(), matcha.getMap().get(i).getY(), matcha.getMap().get(i).getWidth(), matcha.getMap().get(i).getHeight())) {
 								b2.setx(900);
@@ -636,6 +645,12 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 				isSelectP2 = false;
 				isSelectMap = false;
 				isGame = false;
+			}
+			if(lives1 == 0 || lives2 == 0) {
+				isGame = false;
+				isHome = true;
+				lives1 = 5;
+				lives2 = 5;
 			}
 			break;
 			/*
@@ -866,8 +881,8 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 			}
 			double dx = Math.sin(rads);
 			double dy = -Math.cos(rads);
-			b.setvx((int) (2 * dx)); // Set the velocity components based on the angle
-			b.setvy((int) (2 * dy));
+			b.setvx((int) (4 * dx)); // Set the velocity components based on the angle
+			b.setvy((int) (4 * dy));
 			b.move();
 			}
 		}
@@ -910,8 +925,8 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 			}
 			double dx = Math.sin(rads);
 			double dy = -Math.cos(rads);
-			b2.setvx((int) (2 * dx)); // Set the velocity components based on the angle
-			b2.setvy((int) (2 * dy));
+			b2.setvx((int) (4 * dx)); // Set the velocity components based on the angle
+			b2.setvy((int) (4 * dy));
 			b2.move();
 			}
 		}
