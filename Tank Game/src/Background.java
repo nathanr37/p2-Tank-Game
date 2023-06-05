@@ -34,6 +34,10 @@ public class Background {
 		tx.setToTranslation(a, b);
 		tx.scale(1, 1);
 	}
+	
+	public void resize(int a, int b) {
+		tx.scale(a, b);
+	}
 
 	private Image getImage(String path) {
 		Image tempImage = null;
