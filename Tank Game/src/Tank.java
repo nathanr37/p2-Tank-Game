@@ -29,6 +29,10 @@ public class Tank {
         img = getImage(fileName);
         init();
     }
+    
+    public void setAngle(int a) {
+    	angle = a;
+    }
 
     public void move() {
         x += vx;

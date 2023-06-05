@@ -345,6 +345,16 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 					b.sety(900);
 					b.setvx(0);
 					b.setvy(0);
+					p1.setVx(0);
+					p1.setVy(0);
+					p2.setVx(0);
+					p2.setVy(0);
+					p1.setAngle(0);
+					p2.setAngle(0);
+					p1.setX(650);
+					p1.setY(250);
+					p2.setX(20);
+					p2.setY(260);
 					fired = false;
 				}
 				if(b.collided(strawberry.getMap().get(i).getX(), strawberry.getMap().get(i).getY(), strawberry.getMap().get(i).getWidth(), strawberry.getMap().get(i).getHeight())) {
@@ -361,6 +371,16 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 						b2.sety(900);
 						b2.setvx(0);
 						b2.setvy(0);
+						p1.setVx(0);
+						p1.setVy(0);
+						p2.setVx(0);
+						p2.setVy(0);
+						p1.setAngle(0);
+						p2.setAngle(0);
+						p1.setX(650);
+						p1.setY(250);
+						p2.setX(20);
+						p2.setY(260);
 						fired2 = false;
 					}
 					if(b2.collided(strawberry.getMap().get(i).getX(), strawberry.getMap().get(i).getY(), strawberry.getMap().get(i).getWidth(), strawberry.getMap().get(i).getHeight())) {
@@ -402,6 +422,16 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 							b.sety(900);
 							b.setvx(0);
 							b.setvy(0);
+							p1.setVx(0);
+							p1.setVy(0);
+							p2.setVx(0);
+							p2.setVy(0);
+							p1.setAngle(0);
+							p2.setAngle(0);
+							p1.setX(650);
+							p1.setY(315);
+							p2.setX(20);
+							p2.setY(315);  
 							fired = false;
 						}
 						if(b.collided(matcha.getMap().get(i).getX(), matcha.getMap().get(i).getY(), matcha.getMap().get(i).getWidth(), matcha.getMap().get(i).getHeight())) {
@@ -419,6 +449,16 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 								b2.setvx(0);
 								b2.setvy(0);
 								fired2 = false;
+								p1.setVx(0);
+								p1.setVy(0);
+								p2.setVx(0);
+								p2.setVy(0);
+								p1.setAngle(0);
+								p2.setAngle(0);
+								p1.setX(650);
+								p1.setY(315);
+								p2.setX(20);
+								p2.setY(315);  
 							}
 							if(b2.collided(matcha.getMap().get(i).getX(), matcha.getMap().get(i).getY(), matcha.getMap().get(i).getWidth(), matcha.getMap().get(i).getHeight())) {
 								b2.setx(900);
@@ -630,6 +670,10 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 				isSelectMap = false;
 				isGame = true;
 				map = 1;
+				p1.setX(650);
+				p1.setY(315);
+				p2.setX(20);
+				p2.setY(315);  
 			}
 			break;
 		case 50:
@@ -656,6 +700,10 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 				isSelectMap = false;
 				isGame = true;
 				map = 2;
+				p1.setX(650);
+				p1.setY(250);
+				p2.setX(20);
+				p2.setY(260);
 			}
 			break;
 		case 51:
@@ -781,40 +829,40 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 		
 		if(e.getKeyCode() == 77) {
 			//Ball b = new Ball();
-			if(!fired) {
+			if(!fired && isGame) {
 			fired = true;
 			double rads = Math.toRadians(p1.getAngle());
 			if(rads == 0.0) {
 				b.setx(p1.getX() + 49);
 				b.sety(p1.getY() + 10);
 			}
-			else if(rads == 45.0) {
-				b.setx(p1.getX() + 80);
-				b.sety(p1.getY() + 30);
+			else if(rads == 0.78539816339744830) {
+				b.setx(p1.getX() + 73);
+				b.sety(p1.getY() + 23);
 			}
-			else if(rads == 90.0) {
-				b.setx(p1.getX() + 49);
-				b.sety(p1.getY() + 10);
+			else if(rads == 1.5707963267948966) {
+				b.setx(p1.getX() + 85);
+				b.sety(p1.getY() + 47);
 			}
-			else if(rads == 135.0) {
-				b.setx(p1.getX() + 49);
-				b.sety(p1.getY() + 10);
+			else if(rads == 2.356194490192345) {
+				b.setx(p1.getX() + 73);
+				b.sety(p1.getY() + 80);
 			}
-			else if(rads == 180.0) {
-				b.setx(p1.getX() + 49);
-				b.sety(p1.getY() + 10);
+			else if(rads == 3.141592653589793) {
+				b.setx(p1.getX() + 43);
+				b.sety(p1.getY() + 85);
 			}
-			else if(rads == 225.0) {
-				b.setx(p1.getX() + 49);
-				b.sety(p1.getY() + 10);
+			else if(rads == 3.9269908169872414) {
+				b.setx(p1.getX() + 15);
+				b.sety(p1.getY() + 75);
 			}
-			else if(rads == 270.0) {
-				b.setx(p1.getX() + 49);
-				b.sety(p1.getY() + 10);
+			else if(rads == 4.71238898038469) {
+				b.setx(p1.getX() + 9);
+				b.sety(p1.getY() + 44);
 			}
-			else if(rads == 315.0) {
-				b.setx(p1.getX() + 49);
-				b.sety(p1.getY() + 10);
+			else if(rads == 5.497787143782138) {
+				b.setx(p1.getX() + 17);
+				b.sety(p1.getY() + 15);
 			}
 			double dx = Math.sin(rads);
 			double dy = -Math.cos(rads);
@@ -825,40 +873,40 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 		}
 		if(e.getKeyCode() == 67) {
 			//Ball b = new Ball();
-			if(!fired2) {
+			if(!fired2 && isGame) {
 			fired2 = true;
 			double rads = Math.toRadians(p2.getAngle());
 			if(rads == 0.0) {
 				b2.setx(p2.getX() + 49);
 				b2.sety(p2.getY() + 10);
 			}
-			else if(rads == 45.0) {
-				b2.setx(p2.getX() + 80);
-				b2.sety(p2.getY() + 30);
+			else if(rads == 0.78539816339744830) {
+				b2.setx(p2.getX() + 73);
+				b2.sety(p2.getY() + 23);
 			}
-			else if(rads == 90.0) {
-				b2.setx(p2.getX() + 49);
-				b2.sety(p2.getY() + 10);
+			else if(rads == 1.5707963267948966) {
+				b2.setx(p2.getX() + 85);
+				b2.sety(p2.getY() + 47);
 			}
-			else if(rads == 135.0) {
-				b2.setx(p2.getX() + 49);
-				b2.sety(p2.getY() + 10);
+			else if(rads == 2.356194490192345) {
+				b2.setx(p2.getX() + 73);
+				b2.sety(p2.getY() + 80);
 			}
-			else if(rads == 180.0) {
-				b2.setx(p2.getX() + 49);
-				b2.sety(p2.getY() + 10);
+			else if(rads == 3.141592653589793) {
+				b2.setx(p2.getX() + 43);
+				b2.sety(p2.getY() + 85);
 			}
-			else if(rads == 225.0) {
-				b2.setx(p2.getX() + 49);
-				b2.sety(p2.getY() + 10);
+			else if(rads == 3.9269908169872414) {
+				b2.setx(p2.getX() + 15);
+				b2.sety(p2.getY() + 75);
 			}
-			else if(rads == 270.0) {
-				b2.setx(p2.getX() + 49);
-				b2.sety(p2.getY() + 10);
+			else if(rads == 4.71238898038469) {
+				b2.setx(p2.getX() + 9);
+				b2.sety(p2.getY() + 44);
 			}
-			else if(rads == 315.0) {
-				b2.setx(p2.getX() + 49);
-				b2.sety(p2.getY() + 10);
+			else if(rads == 5.497787143782138) {
+				b2.setx(p2.getX() + 17);
+				b2.sety(p2.getY() + 15);
 			}
 			double dx = Math.sin(rads);
 			double dy = -Math.cos(rads);
