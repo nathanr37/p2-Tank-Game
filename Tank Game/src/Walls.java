@@ -4,7 +4,7 @@ public class Walls {
 	private int y;
 	private int width;
 	private int height;
-	public Walls(int ex, int wy, int w, int h) {
+	public Walls(int ex, int wy, int w, int h) { //wall objects to make it easier for collision
 		x = ex;
 		y = wy;
 		width = w;

@@ -54,7 +54,7 @@ public class Tank {
         }
     }
     
-    public boolean collided(int ox, int oy, int ow, int oh) {
+    public boolean collided(int ox, int oy, int ow, int oh) { //collision with balls or walls
     	Rectangle obs = new Rectangle(ox, oy, ow, oh);
     	Rectangle tank = new Rectangle(x + 28, y + 30, width - 56, height - 60);
     	return obs.intersects(tank);

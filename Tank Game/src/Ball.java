@@ -53,7 +53,7 @@ public class Ball {
 		tx.scale(1, 1);
 	}
 	
-	 public boolean collided(int ox, int oy, int ow, int oh) {
+	 public boolean collided(int ox, int oy, int ow, int oh) { //collide with walls or tank
 	    	Rectangle obs = new Rectangle(ox, oy, ow, oh);
 	    	Rectangle b = new Rectangle(x, y, width, height);
 	    	return obs.intersects(b);
@@ -68,10 +68,6 @@ public class Ball {
         g2.translate(x, y);
         g2.setTransform(oldTransform);
 
-	}
-	public void fireBall(Tank t) {
-		vx = t.getVx();
-		vy = t.getVy(); 
 	}
 	public int getX() {
 		return x;

@@ -27,56 +27,51 @@ import java.awt.geom.AffineTransform;
 public class Driver extends JPanel implements ActionListener, KeyListener {
 
 	private int score;
-	boolean fired = false;
-	boolean fired2 = false;
+	boolean fired = false;	//boolean for if the first tank fired
+	boolean fired2 = false; //boolean for if the second tank fired
 	boolean temp2 = true;
-	private Map strawberry;
-	private Map matcha;
-	// Music hop = new Music("Sweep.wav", false);
+	private Map strawberry; //strawberry map walls
+	private Map matcha; //matcha map walls
 
-	// hop.play
-
-	int screen_width = 800;
-	int screen_height = 800;
-	boolean isHome = true;
-	boolean isSelectP1 = false;
-	boolean isSelectP2 = false;
-	boolean isSelectMap = false;
-	boolean isGame = false;
-	int tank1;
-	int tank2;
+	int screen_width = 800; //width of screen
+	int screen_height = 800; //height of screen
+	boolean isHome = true; //boolean for if the current screen is home screen
+	boolean isSelectP1 = false; //boolean for if the current screen is the select player one skin screen
+	boolean isSelectP2 = false; //boolean for if the current screen is the select player two skin screen
+	boolean isSelectMap = false; //boolean for if the current screen is to select the map
+	boolean isGame = false; //boolean for if the screen is the running game
+	int tank1; //player 1 tank skin number
+	int tank2; //player 2 tank skin number
 	
-	Tank p1;
-	Tank p2;
-	Tank regEx;
-	Tank matchaEx;
-	Tank thaiEx;
-	Tank taroEx;
-	Tank strawberryEx;
-	Tank regEx2;
+	Tank p1; //player one tank
+	Tank p2; //player two tank
+	Tank regEx; //regular milk tea tank
+	Tank matchaEx; //matcha tank
+	Tank thaiEx; //thai tank
+	Tank taroEx; //taro tank
+	Tank strawberryEx; //strawberry tank
+	//other tanks are the same but for p2 selection
+	Tank regEx2; 
 	Tank matchaEx2;
 	Tank thaiEx2;
 	Tank taroEx2;
 	Tank strawberryEx2;
-	Ball b;
-	Ball b2;
-	int map;
+	Ball b; //boba ball shot by player 1
+	Ball b2; //boba ball shot by player 2
+	int map; //map number chosen
 
-	Background bg;
-	Background start;
-	Background m;
-	int lives1 = 5;
-	int lives2 = 5;
-
-	String lose = "";
-	String win = "";
-	String lost = "";
+	Background bg; //strawberry map background
+	Background start; //starting background
+	Background m; //matcha map background
+	int lives1 = 5; //player 2 lives
+	int lives2 = 5; //player 1 lives
 
 	// ****************************paint
 	// method******************************************
 	public void paint(Graphics g) {
 		super.paintComponent(g);
-		if(isHome) {
+		//home screen
+		if(isHome) { 
 			isSelectP1 = false;
 			isSelectP2 = false;
 			isSelectMap = false;
@@ -88,6 +83,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 		    g.setFont(new Font("Courier New", 1, 30));
 		    g.drawString("Press space to start", 200, 400);
 		}
+		//select player 1 tank screen
 		else if(isSelectP1) {
 			isHome = false;
 			isSelectP2 = false;
@@ -124,6 +120,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 			g.drawString("Strawberry", 440, 500);
 			g.drawString("Press 5", 460, 525);
 		}
+		//player 2 tank select screen
 		else if(isSelectP2) {
 			isHome = false;
 			isSelectP1 = false;
@@ -160,6 +157,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 			g.drawString("Strawberry", 440, 500);
 			g.drawString("Press 5", 460, 525);
 		}
+		//map select screen
 		else if(isSelectMap) {
 			start.paint(g);
 			if(tank1 == 1) {
@@ -209,6 +207,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 		    g.drawString("Strawberry Map", 450, 425);
 		    g.drawString("Press 2", 480, 450);
 		}
+		//game screen
 		else if(isGame) {
 			isHome = false;
 			isSelectP1 = false;
@@ -216,10 +215,12 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 			isSelectMap = false;
 
 		g.setColor(Color.black);
+		//gridlines to make walls
 //		for (int i = 0; i < 800; i += 20) {
 //			g.drawLine(i, 0, i, 800);
 //			g.drawLine(0, i, 800, i);
 //		}
+		//creates walls for strawberry if strawberry map selected
 		if(map == 2) {
 			bg.paint(g);
 		strawberry = new Map();
@@ -251,6 +252,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 			g.fillRect(strawberry.getMap().get(i).getX(), strawberry.getMap().get(i).getY(), strawberry.getMap().get(i).getWidth(), strawberry.getMap().get(i).getHeight());
 		}
 		}
+		//creates walls for matcha if matcha map selected
 		if(map == 1) {
 			m.paint(g);
 			matcha = new Map();
@@ -283,7 +285,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 				g.fillRect(matcha.getMap().get(i).getX(), matcha.getMap().get(i).getY(), matcha.getMap().get(i).getWidth(), matcha.getMap().get(i).getHeight());
 			}
 		}
-
+		//prints lives
 		g.setFont(new Font("Courier New", 1, 30));
 		g.setColor(Color.black);
 		g.drawString(("Lives:") + Integer.toString(lives1), 20, 20);
@@ -293,10 +295,16 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 		// paint and update tank
 		p1.paint(g);
 		p2.paint(g);
+		
+		//tank hitbox
 //		g.drawRect(tank.getX() + 28, tank.getY() + 30, tank.getWidth() - 56, tank.getHeight() - 60);
+		
+		//paints boba ball if fired
 		if(fired) {
 			if(b != null) {
 			b.paint(g);
+			
+			//ball hitbox
 			//g.drawRect(b.getX(), b.getY(), b.getW(), b.getH());
 			}
 		}
@@ -305,6 +313,8 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 				b2.paint(g);
 			}
 		}
+		
+		//ending screen if one player's lives becomes 0
 		if(lives1 == 0 || lives2 == 0) {
 			start.paint(g);
 			if(lives1 == 0) {
@@ -332,19 +342,24 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 	Font font = new Font("Courier New", 1, 50);
 	Font font2 = new Font("Courier New", 1, 30);
 
-	//
+	//update method for collisions and moving
 	public void update() {
 		boolean colid = false;
 		boolean colid2 = false;
+		//strawberry map
 		if(map == 2) {
 		if(strawberry != null) {
+		//checks for collisions for all walls
 		for(int i = 0; i < strawberry.getMap().size(); i++) {
+			//player 1 tank/wall collision
 			if(p1.collided(strawberry.getMap().get(i).getX(), strawberry.getMap().get(i).getY(), strawberry.getMap().get(i).getWidth(), strawberry.getMap().get(i).getHeight())) {
 				colid = true;
 				p1.setVx(-p1.getVx() * 10);
 				p1.setVy(-p1.getVy() * 10);
 			}
+			//ball and wall or ball and tank collisions
 			if(fired) {
+				//ball/tank collision
 				if(b.collided(p2.getX() + 28, p2.getY() + 30, p2.getWidth() - 56, p2.getHeight() - 60)) {
 					b.setx(900);
 					b.sety(900);
@@ -356,13 +371,14 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 					p2.setVy(0);
 					p1.setAngle(0);
 					p2.setAngle(0);
-					p1.setX(650);
+					p1.setX(650); //resets spawn
 					p1.setY(250);
 					p2.setX(20);
 					p2.setY(260);
 					fired = false;
-					lives1--;
+					lives1--; // - one life
 				}
+				//ball wall
 				if(b.collided(strawberry.getMap().get(i).getX(), strawberry.getMap().get(i).getY(), strawberry.getMap().get(i).getWidth(), strawberry.getMap().get(i).getHeight())) {
 					b.setx(900);
 					b.sety(900);
@@ -371,6 +387,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 					fired = false;
 				}
 			}
+				//same thing but for player 2 firing
 				if(fired2) {
 					if(b2.collided(p1.getX() + 28, p1.getY() + 30, p1.getWidth() - 56, p1.getHeight() - 60)) {
 						b2.setx(900);
@@ -398,18 +415,23 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 						fired2 = false;
 					}
 			}
+			//tank 2 and wall collision
 			if(p2.collided(strawberry.getMap().get(i).getX(), strawberry.getMap().get(i).getY(), strawberry.getMap().get(i).getWidth(), strawberry.getMap().get(i).getHeight())) {
 				colid2 = true;
 				p2.setVx(-p2.getVx() * 10);
 				p2.setVy(-p2.getVy() * 10);
 			}
 		}
+		
+		//moves tanks back as if tanks bounce back a little after hitting wall
 		if(p1 != null) {
 			p1.move();
 		}
 		if(p2 != null) {
 			p2.move();
 		}
+		
+		//if there was a collision, it sets the tank's velocity back to 0 so it only bounces of the walls a little
 		if(colid) {
 			p1.setVx(0);
 			p1.setVy(0);
@@ -420,6 +442,8 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 		}
 		}
 		}
+		
+		//same thing but for matcha map
 		if(map == 1) {
 			if(matcha != null) {
 				for(int i = 0; i < matcha.getMap().size(); i++) {
@@ -542,7 +566,6 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 		thaiEx2 = new Tank("thai.png");
 		taroEx2 = new Tank("taro.png");
 		strawberryEx2 = new Tank("strawberry.png");
-		//b = new Ball(5, 5, tank.getX(), tank.getY(), "Boba.png");
 
 		// Add background
 		start = new Background("start.png");
@@ -574,7 +597,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 
 		switch (e.getKeyCode()) {
 
-		case 37: // left
+		case 37: // rotate counterclockwise
 			if(isGame) {
 				p1.rotateCounterClockwise();
 			}
@@ -590,7 +613,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 			temp2 = true;
 			}
 			break;
-		case 39: // right
+		case 39: // rotate clockwise
 			if(isGame) {
 				p1.rotateClockwise();
 			}
@@ -606,13 +629,13 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 			temp2 = true;
 			}
 			break;
-		case 65: // left
+		case 65: // counterclockwise for second tank
 			if(isGame) {
 				p2.rotateCounterClockwise();
 			}
 			break;
 
-		case 87: // up
+		case 87: // up for second tank
 			if(isGame) {
 			double radians = Math.toRadians(p2.getAngle());
 			double dx1 = Math.sin(radians);
@@ -622,13 +645,13 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 			temp2 = true;
 			}
 			break;
-		case 68: // right
+		case 68: // clockwise for second tank
 			if(isGame) {
 				p2.rotateClockwise();
 			}
 			break;
 
-		case 83: // down
+		case 83: // down for second tank
 			if(isGame) {
 			double rads = Math.toRadians(p2.getAngle());
 			double dx12 = Math.sin(rads);
@@ -638,7 +661,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 			temp2 = true;
 			}
 			break;
-		case 32:
+		case 32: //space button for starting screen and restart screen at end
 			if(isHome) {
 				isHome = false;
 				isSelectP1 = true;
@@ -661,6 +684,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 
 			// handle going left and right
 			// A and D keys
+		//rest of the cases selects specific tank or map
 		case 49:
 			if(isSelectP1) {
 				isHome = false;
@@ -685,7 +709,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 				isSelectMap = false;
 				isGame = true;
 				map = 1;
-				p1.setX(650);
+				p1.setX(650); //sets spawn points
 				p1.setY(315);
 				p2.setX(20);
 				p2.setY(315);  
@@ -782,9 +806,10 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void keyReleased(KeyEvent e) {
 		/*
-		 * turn off velocity for Frog if you don't want it moving when you have stopped
+		 * turn off velocity for tank if you don't want it moving when you have stopped
 		 * pressing the keys
 		 */
+		
 		if (e.getKeyCode() == 38) {
 			if(isGame) {
 				p1.setVy(0);
@@ -842,11 +867,12 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 			}
 		}
 		
+		//press m for firing boba ball
 		if(e.getKeyCode() == 77) {
-			//Ball b = new Ball();
 			if(!fired && isGame) {
 			fired = true;
-			double rads = Math.toRadians(p1.getAngle());
+			double rads = Math.toRadians(p1.getAngle()); //finds angle
+			//these if statements are so that the ball starts at the tank's nozzle for different angles it rotates to
 			if(rads == 0.0) {
 				b.setx(p1.getX() + 49);
 				b.sety(p1.getY() + 10);
@@ -886,6 +912,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 			b.move();
 			}
 		}
+		//same thing but pressing c for other tank to fire boba ball
 		if(e.getKeyCode() == 67) {
 			//Ball b = new Ball();
 			if(!fired2 && isGame) {
@@ -931,7 +958,6 @@ public class Driver extends JPanel implements ActionListener, KeyListener {
 			}
 		}
 
-		// do the same thing for the other keys
 	}
 	
 	private boolean isAngleCloseToCardinalOrDiagonal(double angle) {

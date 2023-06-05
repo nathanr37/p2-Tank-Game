@@ -35,7 +35,7 @@ public class Background {
 		tx.scale(1, 1);
 	}
 	
-	public void resize(int a, int b) {
+	public void resize(int a, int b) { //resize to fit screen
 		tx.scale(a, b);
 	}
 
